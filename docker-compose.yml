@@ -1,0 +1,24 @@
+services:
+  webtop:
+    image: lscr.io/linuxserver/webtop:amd64-alpine-kde
+    container_name: webtop
+    security_opt:
+      - seccomp:unconfined #optional
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+      - TITLE=云端Linux电脑#optional
+      - PASSWORD=youpassword
+      - DOCKER_MODS=linuxserver/mods:universal-package-install
+      - INSTALL_PACKAGES=font-noto-cjk
+      - LC_ALL=zh_CN.UTF-8
+    volumes:
+      - /teamspace/studios/this_studio/dockge/webtop/config:/config
+      - /var/run/docker.sock:/var/run/docker.sock #optional
+    ports:
+      - 5544:3000
+      - 5555:3001
+    shm_size: 1gb #optional
+    restart: unless-stopped
+
